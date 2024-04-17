@@ -1,0 +1,25 @@
+.new-collection > div {
+    display: grid;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    justify-content: center;
+}
+
+.new-collection > h1 {
+    font-size: 40px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+.collection-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.collection-underline::after {
+    content: "";
+    position: absolute;
+    left: 10%; /* Adjust the starting position as needed */
+    right: 10%; /* Adjust the ending position as needed */
+    bottom: -12px; /* Adjust the distance from the text as needed */
+    border-bottom: 6px solid black; /* Adjust the underline style as needed */
+}
