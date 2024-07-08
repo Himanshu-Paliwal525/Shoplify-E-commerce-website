@@ -19,14 +19,12 @@ const Login = () => {
         })
             .then((response) => response.json())
             .then((data) => (responseData = data));
-            if(responseData.success)
-            {
-                localStorage.setItem('auth-token',responseData.token);
-                window.location.replace('/');
-            }
-            else {
-                alert(responseData.error)
-            }
+        if (responseData.success) {
+            localStorage.setItem("token", responseData.token);
+            window.location.replace("/");
+        } else {
+            alert(responseData.error);
+        }
     };
     const signup = async () => {
         let responseData;
@@ -40,14 +38,12 @@ const Login = () => {
         })
             .then((response) => response.json())
             .then((data) => (responseData = data));
-            if(responseData.success)
-            {
-                localStorage.setItem('auth-token',responseData.token);
-                window.location.replace('/');
-            }
-            else {
-                alert(responseData.error)
-            }
+        if (responseData.success) {
+            localStorage.setItem("token", responseData.token);
+            window.location.replace("/");
+        } else {
+            alert(responseData.error);
+        }
     };
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

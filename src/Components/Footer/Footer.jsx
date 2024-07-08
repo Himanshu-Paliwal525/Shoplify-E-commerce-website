@@ -18,13 +18,19 @@ const Footer = () => {
             </ul>
             <ul className="footer-icons">
                 <li>
+                    <a href="https://www.whatsapp.com" target="blank">
                     <img className="icon-size" src={whatsapp} alt="" />
+                    </a>
                 </li>
                 <li>
+                    <a href="https://www.pinterest.com" target="blank">
                     <img className="icon-size" src={pinterest} alt="" />
+                    </a>
                 </li>
                 <li>
+                    <a href="https://www.instagram.com" target="blank">
                     <img className="icon-size" src={instagram} alt="" />
+                    </a>
                 </li>
             </ul>
             <hr />

@@ -1,42 +1,56 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./CartItems.css";
 import { ShopContext } from "../../Context/Context";
 import remove_icon from "../Assets/cross.png";
 const CartItems = () => {
-    const { all_products, cartItems, RemoveFromCart, TotalCartAmount } =
-        useContext(ShopContext);
-    const { total } = TotalCartAmount();
-    const CartProducts = all_products.map((e) => {
-        if (cartItems[e.id] > 0) {
-            return (
-                <div>
-                    <div className="cartItems-format">
-                        <p>
-                            <img
-                                src={e.image}
-                                alt=""
-                                className="product-icon"
-                            />
-                        </p>
-                        <p>{e.name}</p>
-                        <p>$ {e.new_price}</p>
-                        <p>{cartItems[e.id]}</p>
-                        <p>$ {e.new_price * cartItems[e.id]}</p>
-                        <p>
-                            <img
-                                className="remove-icon"
-                                src={remove_icon}
-                                alt=""
-                                onClick={() => RemoveFromCart(e.id)}
-                            />
-                        </p>
-                    </div>
-                    <hr />
-                </div>
-            );
-        } else return null;
-    });
-
+    const { TotalCartAmount, setTotalItems } = useContext(ShopContext);
+    const [CartProducts, setCartProducts] = useState(null);
+    const [trigger, setTrigger] = useState(false);
+    const RemoveFromCart = async (product) => {
+        if (product.quantity > 1) {
+            const response = await fetch("http://localhost:4000/cart", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify({
+                    ...product,
+                    quantity: product.quantity - 1,
+                }),
+            });
+            if (response.ok) {
+                console.log("Item updated successfully.");
+                setTrigger((prev) => !prev);
+            }
+        } else {
+            const response = await fetch("http://localhost:4000/cart", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify(product),
+            });
+            if (response.ok) {
+                console.log("Item deleted.");
+                setTrigger((prev) => !prev);
+            }
+        }
+    };
+    useEffect(() => {
+        fetch("http://localhost:4000/cart", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => setCartProducts(data));
+    }, [trigger]);
+    const { totalItem, totalPrice } = TotalCartAmount(CartProducts || []);
+    setTotalItems(totalItem);
     return (
         <div className="cart-items">
             <div className="cartItems-format format-head">
@@ -48,14 +62,42 @@ const CartItems = () => {
                 <p>Remove</p>
             </div>
             <hr />
-            {CartProducts}
+            {CartProducts &&
+                CartProducts.map((product) => {
+                    return (
+                        <div>
+                            <div className="cartItems-format">
+                                <p>
+                                    <img
+                                        src={product.image}
+                                        alt=""
+                                        className="product-icon"
+                                    />
+                                </p>
+                                <p>{product.name}</p>
+                                <p>$ {product.curr_price}</p>
+                                <p>{product.quantity}</p>
+                                <p>$ {product.curr_price * product.quantity}</p>
+                                <p>
+                                    <img
+                                        className="remove-icon"
+                                        src={remove_icon}
+                                        alt=""
+                                        onClick={() => RemoveFromCart(product)}
+                                    />
+                                </p>
+                            </div>
+                            <hr />
+                        </div>
+                    );
+                })}
             <div className="cartItems-down">
                 <div className="cartItems-total">
                     <h1>Cart Total</h1>
                     <div className="total-bill">
                         <div className="cartItems-total-item">
                             <p>SubTotal</p>
-                            <p>$ {total}</p>
+                            <p>$ {totalItem}</p>
                         </div>
                         <hr />
                         <div className="cartItems-total-item">
@@ -65,7 +107,7 @@ const CartItems = () => {
                         <hr />
                         <div className="cartItems-total-item">
                             <p>Total</p>
-                            <p>$ {total}</p>
+                            <p>$ {totalPrice}</p>
                         </div>
                     </div>
                     <button>PROCEED TO CHECKOUT</button>

@@ -29,6 +29,13 @@
     gap: 50px;
     padding: 0 10px;
 }
+.nav-bar-main > li > a {
+    border-bottom: 2px solid white;
+}
+.nav-bar-main > li > a:hover {
+    color: red;
+    border-bottom: 2px solid red;
+}
 ul {
     display: flex;
     list-style: none;
@@ -45,7 +52,7 @@ a {
     gap: 1.875rem;
 }
 
-.login button {
+.login-logout-btn {
     width: 6.25rem;
     font-size: 1.125rem;
     background: white;
@@ -55,8 +62,10 @@ a {
     border: 2px solid black;
     cursor: pointer;
 }
-.login button:active {
+.login-logout-btn:hover {
+    background-color: black;
+    color: white;
+}
+.login-logout-btn:active {
     background-color: rgb(231, 231, 231);
 }
-
-

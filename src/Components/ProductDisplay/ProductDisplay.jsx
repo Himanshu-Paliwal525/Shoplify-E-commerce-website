@@ -1,11 +1,48 @@
 import "./ProductDisplay.css";
 import star from "../Assets/star_icon.png";
 import dull_star from "../Assets/star_dull_icon.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ShopContext } from "../../Context/Context";
 const ProductDisplay = (props) => {
     const { product } = props;
-    const { AddToCart } = React.useContext(ShopContext);
+    const [size, setSize] = useState("");
+    const [activeIndex, setActiveIndex] = useState(null);
+    const [productWithSize, setProductWithSize] = useState(product);
+    const { setTotalItems } = React.useContext(ShopContext);
+    const selectSize = (e) => {
+        setSize(e.target.innerHTML);
+        console.log(productWithSize.size);
+    };
+    const handleSizeChange = async (e, i) => {
+        selectSize(e);
+        setActiveIndex(i);
+    };
+    useEffect(() => {
+        setProductWithSize((productSize) => ({ ...productSize, size: size }));
+    }, [size]);
+    const handleClick = async (productSize) => {
+        if (size === "") {
+            alert("Please select size first");
+        } else {
+            console.log(productSize);
+            const response = await fetch("http://localhost:4000/addToCart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify(productSize),
+            });
+            const data = await response.json();
+            if (data.success) {
+                console.log("Product added to cart:", data.product);
+                setTotalItems((prev) => prev + 1);
+            } else {
+                console.error("Failed to add product to cart:", data.error);
+            }
+        }
+    };
+    const sizes = ["S", "M", "L", "XL", "XXL"];
     return (
         <div className="productdisplay">
             <div className="display-left">
@@ -41,16 +78,34 @@ const ProductDisplay = (props) => {
                 <div className="display-size">
                     <h1>Select Size</h1>
                     <div className="all-sizes">
-                        <div>S</div>
-                        <div>M</div>
-                        <div>L</div>
-                        <div>XL</div>
-                        <div>XXL</div>
+                        {sizes.map((item, i) => {
+                            return (
+                                <div
+                                    onClick={(e) => handleSizeChange(e, i)}
+                                    key={i}
+                                    style={
+                                        activeIndex === i
+                                            ? {
+                                                  background:
+                                                      "rgb(242, 86, 86)",
+                                                  borderColor:
+                                                      "rgb(242, 86, 86)",
+                                                  color: "white",
+                                                  boxShadow:
+                                                      "0 0 2px rgb(124, 124, 124)",
+                                              }
+                                            : {}
+                                    }
+                                >
+                                    {item}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
                 <div className="shop-buttons">
                     <button>BUY NOW</button>
-                    <button onClick={() => AddToCart(product.id)}>
+                    <button onClick={() => handleClick(productWithSize)}>
                         ADD TO CART
                     </button>
                 </div>

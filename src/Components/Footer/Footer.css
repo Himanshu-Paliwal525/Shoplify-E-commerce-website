@@ -11,7 +11,12 @@
 .footer-main {
     justify-content: center;
     gap: 20%;
-    /* width: 100%; */
+}
+.footer-main > li {
+    transition-duration: 0.2s;
+}
+.footer-main > li:hover {
+    transform: scale(1.05);
 }
 .footer-icons {
     /* border: 1px solid white; */

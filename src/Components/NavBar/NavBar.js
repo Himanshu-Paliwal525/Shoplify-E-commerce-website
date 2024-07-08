@@ -1,48 +1,65 @@
 import logo from "../Assets/logo.png";
 import cart_icon from "../Assets/bag.png";
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { ShopContext } from "../../Context/Context";
 const NavBar = () => {
-    const { TotalCartAmount } = useContext(ShopContext);
-    const { quantity } = TotalCartAmount();
+    const { totalItems } = useContext(ShopContext);
+    const navStyle = ({ isActive }) => {
+        return isActive
+            ? {
+                  color: "red",
+                  borderBottom: "4px solid red",
+                  fontWeight: "bold",
+              }
+            : {};
+    };
     return (
         <div className="nav-bar">
             <img src={logo} alt="" />
             <ul className="nav-bar-main">
                 <li>
-                    <Link to="/">Shop</Link>
+                    <NavLink to="/" style={navStyle}>
+                        Shop
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/men">Men</Link>
+                    <NavLink to="/men" style={navStyle}>
+                        Men
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/women">Women</Link>
+                    <NavLink to="/women" style={navStyle}>
+                        Women
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/kids">Kids</Link>
+                    <NavLink to="/kids" style={navStyle}>
+                        Kids
+                    </NavLink>
                 </li>
             </ul>
             <div className="login">
-                {localStorage.getItem("auth-token") ? (
+                {localStorage.getItem("token") ? (
                     <button
                         onClick={() => {
-                            localStorage.removeItem("auth-token");
+                            localStorage.removeItem("token");
                             window.location.replace("/");
                         }}
+                        className="login-logout-btn logout"
                     >
                         Logout
                     </button>
                 ) : (
-                    <Link to="/login">
-                        <button>Login</button>
-                    </Link>
+                    <NavLink to="/login">
+                        <button className="login-logout-btn login-btn">Login</button>
+                    </NavLink>
                 )}
-                <Link to="/cart">
+                <NavLink to="/cart">
                     <img className="cart" src={cart_icon} alt="" />
-                    <div className="nav-cart-count">{quantity}</div>
-                </Link>
+                    <div className="nav-cart-count">{totalItems}</div>
+                </NavLink>
             </div>
         </div>
     );
