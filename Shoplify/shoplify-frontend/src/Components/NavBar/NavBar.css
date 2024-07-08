@@ -1,0 +1,71 @@
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    box-shadow: 0px 0.4px 1px black;
+}
+.cart {
+    height: 2.7rem;
+}
+.nav-cart-count {
+    width: 22px;
+    display: flex;
+    border-radius: 100%;
+    position: relative;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    font-size: 14px;
+    right: 10px;
+    background: red;
+    color: white;
+}
+
+.nav-bar-main {
+    padding-left: 0;
+    gap: 50px;
+    padding: 0 10px;
+}
+.nav-bar-main > li > a {
+    border-bottom: 2px solid white;
+}
+.nav-bar-main > li > a:hover {
+    color: red;
+    border-bottom: 2px solid red;
+}
+ul {
+    display: flex;
+    list-style: none;
+}
+a {
+    font-size: 1.25rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+.login {
+    display: flex;
+    align-items: center;
+    gap: 1.875rem;
+}
+
+.login-logout-btn {
+    width: 6.25rem;
+    font-size: 1.125rem;
+    background: white;
+    outline: none;
+    border-radius: 1.125rem;
+    padding: 5px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+.login-logout-btn:hover {
+    background-color: black;
+    color: white;
+}
+.login-logout-btn:active {
+    background-color: rgb(231, 231, 231);
+}
