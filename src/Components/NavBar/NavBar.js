@@ -18,7 +18,7 @@ const NavBar = () => {
     };
     return (
         <div className="nav-bar">
-            <Link style={{ display: "flex", gap: "10px", alignItems: "center" }} to='/'>
+            <Link style={{ display: "flex", gap: "10px", alignItems: 'center' }} to='/'>
                 <img src={Logo} alt="" className="nav-logo" />
                 <img src={LogoName} alt="" className="nav-logo" />
             </Link>

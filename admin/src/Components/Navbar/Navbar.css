@@ -8,10 +8,13 @@
     background: white;
 }
 .nav-logo {
-    width: 200px;
+    height: 80px;
 }
 .nav-profile {
     width: 75px;
+}
+.shoplify {
+    height: 80px;
 }
 @media (max-width: 800px) {
     .navbar {

@@ -9,7 +9,7 @@ const Footer = () => {
     return (
         <div className="footer">
             <Link to='/'>
-                <img src={Logo} className="nav-logo" alt="" /> <span><img src={LogoName} className="nav-logo" alt="" /></span>
+                <img src={Logo} className="nav-logo" alt="" /> <img src={LogoName} className="nav-logo" alt="" />
             </Link>
             <ul className="footer-main">
                 <li>Company</li>

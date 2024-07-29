@@ -53,6 +53,7 @@
     background: #60709f;
     color: white;
     font-size: 16px;
+    cursor: pointer;
     font-weight: 500;
 }
 @media (max-width: 800px) {
