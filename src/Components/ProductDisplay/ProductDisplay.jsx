@@ -3,8 +3,9 @@ import star from "../Assets/star_icon.png";
 import dull_star from "../Assets/star_dull_icon.png";
 import React, { useEffect, useState } from "react";
 import { ShopContext } from "../../Context/Context";
+import { useRef } from "react";
 const ProductDisplay = (props) => {
-    const { product } = props;
+    const { product, setRev } = props;
     const [size, setSize] = useState("");
     const [activeIndex, setActiveIndex] = useState(null);
     const [productWithSize, setProductWithSize] = useState(product);
@@ -43,6 +44,11 @@ const ProductDisplay = (props) => {
         }
     };
     const sizes = ["S", "M", "L", "XL", "XXL"];
+    const review = useRef();
+    setRev(review);
+    const handleReviewClick = () => {
+        review.current.scrollIntoView({ behavior: "smooth" });
+    };
     return (
         <div className="productdisplay">
             <div className="display-left">
@@ -58,7 +64,10 @@ const ProductDisplay = (props) => {
             </div>
             <div className="display-right">
                 <h1>{product.name}</h1>
-                <div className="display-right-star">
+                <div
+                    className="display-right-star"
+                    onClick={() => handleReviewClick()}
+                >
                     <img src={star} alt="" />
                     <img src={star} alt="" />
                     <img src={star} alt="" />
@@ -104,7 +113,9 @@ const ProductDisplay = (props) => {
                     </div>
                 </div>
                 <div className="shop-buttons">
-                    <button>BUY NOW</button>
+                    <button onClick={() => handleClick(productWithSize)}>
+                        BUY NOW
+                    </button>
                     <button onClick={() => handleClick(productWithSize)}>
                         ADD TO CART
                     </button>

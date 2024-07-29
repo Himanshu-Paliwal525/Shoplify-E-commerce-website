@@ -1,14 +1,16 @@
 import "./Footer.css";
-import logo from "../Assets/logo.png";
+import Logo from "../Assets/1_black.png";
+import LogoName from "../Assets/2_black.png";
 import whatsapp from "../Assets/whatsapp.png";
 import instagram from "../Assets/instagram.png";
 import pinterest from "../Assets/pinterest.png";
+import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div className="footer">
-            <div>
-                <img src={logo} alt="" /> <span>Shopper</span>
-            </div>
+            <Link to='/'>
+                <img src={Logo} className="nav-logo" alt="" /> <span><img src={LogoName} className="nav-logo" alt="" /></span>
+            </Link>
             <ul className="footer-main">
                 <li>Company</li>
                 <li>Products</li>

@@ -8,6 +8,9 @@
 .cart {
     height: 2.7rem;
 }
+.nav-logo {
+    height: 80px;
+}
 .nav-cart-count {
     width: 22px;
     display: flex;
@@ -55,17 +58,16 @@ a {
 .login-logout-btn {
     width: 6.25rem;
     font-size: 1.125rem;
-    background: white;
     outline: none;
-    border-radius: 1.125rem;
+    border-radius: 1.5rem;
     padding: 5px;
     border: 2px solid black;
     cursor: pointer;
-}
-.login-logout-btn:hover {
     background-color: black;
     color: white;
 }
+
 .login-logout-btn:active {
-    background-color: rgb(231, 231, 231);
+    background-color: white;
+    color: black;
 }

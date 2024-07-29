@@ -1,7 +1,8 @@
-import logo from "../Assets/logo.png";
 import cart_icon from "../Assets/bag.png";
 import "./NavBar.css";
-import { NavLink } from "react-router-dom";
+import Logo from "../Assets/1.png";
+import LogoName from "../Assets/2.png";
+import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { ShopContext } from "../../Context/Context";
 const NavBar = () => {
@@ -17,7 +18,10 @@ const NavBar = () => {
     };
     return (
         <div className="nav-bar">
-            <img src={logo} alt="" />
+            <Link style={{ display: "flex", gap: "10px", alignItems: "center" }} to='/'>
+                <img src={Logo} alt="" className="nav-logo" />
+                <img src={LogoName} alt="" className="nav-logo" />
+            </Link>
             <ul className="nav-bar-main">
                 <li>
                     <NavLink to="/" style={navStyle}>
@@ -53,7 +57,9 @@ const NavBar = () => {
                     </button>
                 ) : (
                     <NavLink to="/login">
-                        <button className="login-logout-btn login-btn">Login</button>
+                        <button className="login-logout-btn login-btn">
+                            Login
+                        </button>
                     </NavLink>
                 )}
                 <NavLink to="/cart">

@@ -21,7 +21,7 @@
     font-size: 20px;
     font-weight: 400;
 }
-.offers-left > button {
+.offers-btn {
     padding: 13px 35px;
     display: flex;
     cursor: pointer;
@@ -36,7 +36,7 @@
     border: none;
     margin-top: 70px;
 }
-.offers-left > button:active {
+.offers-btn:active {
     background: rgb(255, 87, 87);
 }
 .offers-right > img {

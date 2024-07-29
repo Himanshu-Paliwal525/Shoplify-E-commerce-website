@@ -2,13 +2,13 @@ import { useState } from "react";
 import "./descriptionbox.css";
 import Description from "./description";
 import Reviews from "./reviews";
-const DescriptionBox = () => {
+const DescriptionBox = ({rev}) => {
     const [active, setActive] = useState(false);
     const handleClick = () => {
         setActive((prev) => !prev);
     };
     return (
-        <div className="description-box">
+        <div className="description-box" ref={rev}>
             <div className="navigator">
                 <div className="navDescription" onClick={handleClick}>
                     <li
@@ -41,7 +41,7 @@ const DescriptionBox = () => {
                     </li>
                 </div>
             </div>
-            {active ? <Description /> : <Reviews />}
+            {active ? <Description /> : <Reviews/>}
         </div>
     );
 };

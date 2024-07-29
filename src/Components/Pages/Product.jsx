@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../../Context/Context";
 import Breadcrum from "../Breadcrum/Breadcrum";
@@ -11,11 +11,12 @@ const Product = () => {
     const product = all_products.find((e) => {
         return e.id === Number(id) ? e : null;
     });
+    const [rev,setRev] = useState(null);
     return (
         <div>
             <Breadcrum product={product} />;
-            <ProductDisplay product={product} />
-            <DescriptionBox />
+            <ProductDisplay product={product} setRev={setRev} />
+            <DescriptionBox rev={rev} />
             <Popular header="Related Products"/>
         </div>
     );
