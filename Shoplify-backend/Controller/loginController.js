@@ -1,6 +1,6 @@
 const Users = require("../model/user");
 const jwt = require("jsonwebtoken");
-
+const secretKey = process.env.JWT_SECRET;
 const signup = async (req, res) => {
     let check = await Users.findOne({ email: req.body.email });
     if (check)
@@ -21,7 +21,9 @@ const signup = async (req, res) => {
     });
     await user.save();
 
-    const token = jwt.sign({ userId: user._id }, "secret_ecom");
+    const token = jwt.sign({ userId: user._id }, secretKey, {
+        expiresIn: "1h",
+    });
     res.json({ success: true, token });
 };
 
@@ -31,7 +33,7 @@ const login = async (req, res) => {
         const passCompare = req.body.password === user.password;
         if (passCompare) {
             const data = { userId: user._id };
-            const token = jwt.sign(data, "secret_ecom");
+            const token = jwt.sign(data, secretKey, {expiresIn: '1h'});
             res.json({ success: true, token });
         } else {
             res.json({ success: false, error: "Wrong Password" });
