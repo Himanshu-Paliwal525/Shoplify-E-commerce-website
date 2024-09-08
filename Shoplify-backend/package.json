@@ -5,9 +5,10 @@
   "description": "Backend for HH Mart website",
   "main": "index.js",
   "scripts": {
-    "deploy": "gh-pages -d build",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "node index.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+
   "author": "Himanshu Paliwal",
   "license": "ISC",
   "dependencies": {
