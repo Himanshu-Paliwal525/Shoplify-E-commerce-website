@@ -9,7 +9,7 @@ const Login = () => {
     });
     const login = async () => {
         let responseData;
-        await fetch("http://localhost:4000/login", {
+        await fetch("https://shoplify-e-commerce-website.onrender.com/login", {
             method: "POST",
             headers: {
                 Accept: "application/form-data",
@@ -28,7 +28,7 @@ const Login = () => {
     };
     const signup = async () => {
         let responseData;
-        await fetch("http://localhost:4000/signup", {
+        await fetch("https://shoplify-e-commerce-website.onrender.com/signup", {
             method: "POST",
             headers: {
                 Accept: "application/form-data",

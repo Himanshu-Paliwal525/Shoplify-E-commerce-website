@@ -26,7 +26,7 @@ const ProductDisplay = (props) => {
             alert("Please select size first");
         } else {
             console.log(productSize);
-            const response = await fetch("http://localhost:4000/addToCart", {
+            const response = await fetch("https://shoplify-e-commerce-website.onrender.com/addToCart", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
