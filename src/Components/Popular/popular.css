@@ -1,9 +1,7 @@
 .popular > div {
     display: flex;
-    /* width: 100%; */
     overflow-x: auto;
-    /* justify-content: center; */
-    /* padding: 20px 9px; */
+    overflow: auto hidden;
 }
 
 .popular > h1 {
@@ -19,9 +17,8 @@
 .underline::after {
     content: "";
     position: absolute;
-    left: 10%; /* Adjust the starting position as needed */
-    right: 10%; /* Adjust the ending position as needed */
-    bottom: -12px; /* Adjust the distance from the text as needed */
-    border-bottom: 6px solid black; /* Adjust the underline style as needed */
+    left: 10%;
+    right: 10%;
+    bottom: -12px;
+    border-bottom: 6px solid black;
 }
-

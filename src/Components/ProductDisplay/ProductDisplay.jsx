@@ -36,7 +36,8 @@ const ProductDisplay = (props) => {
             });
             const data = await response.json();
             if (data.success) {
-                console.log("Product added to cart:", data.product);
+                alert('Product added to cart successfully!!');
+                setActiveIndex(null);
                 setTotalItems((prev) => prev + 1);
             } else {
                 console.error("Failed to add product to cart:", data.error);
@@ -116,9 +117,9 @@ const ProductDisplay = (props) => {
                     <button onClick={() => handleClick(productWithSize)}>
                         BUY NOW
                     </button>
-                    <button onClick={() => handleClick(productWithSize)}>
+                    {<button onClick={() => handleClick(productWithSize)}>
                         ADD TO CART
-                    </button>
+                    </button>}
                 </div>
                 <p className="display-category">
                     <span>Category: </span>Women, T-Shirt, Crop Top

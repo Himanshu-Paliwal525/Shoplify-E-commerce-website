@@ -24,13 +24,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB Atlas using environment variable
-const mongoURI = process.env.MONGODB_URI;
+const mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017/hhmart";
 mongoose
-    .connect(mongoURI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    .connect(mongoURI)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -47,7 +43,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 app.use("/images", express.static("upload/images"));
 
-// Set port from environment variable or default to 4000
 const port = process.env.PORT || 4000;
 
 const authenticateJWT = async (req, res, next) => {
@@ -57,7 +52,7 @@ const authenticateJWT = async (req, res, next) => {
             if (err) {
                 return res.status(403).json({ message: "Forbidden" });
             }
-            req.userId = new mongoose.Types.ObjectId(user.userId); // Convert userId to ObjectId
+            req.userId = new mongoose.Types.ObjectId(user.userId);
             next();
         });
     } else {
@@ -68,7 +63,7 @@ const authenticateJWT = async (req, res, next) => {
 app.post("/upload", upload.single("product"), (req, res) => {
     res.json({
         success: 1,
-        image_url: `http://localhost:${port}/images/${req.file.filename}`, // Adjust this URL for your deployment
+        image_url: `http://localhost:${port}/images/${req.file.filename}`,
     });
 });
 

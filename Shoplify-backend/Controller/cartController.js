@@ -4,7 +4,6 @@ const AddToCart = async (req, res) => {
     const { id, name, new_price, image, size } = req.body;
     const product = await CartItem.findOne({ id });
     const userId = await req.userId;
-    console.log(userId);
     if (product) {
         const updatedProduct = await CartItem.findOneAndUpdate(
             { id },
